@@ -1,0 +1,10 @@
+node_modules
+.next
+.env.local
+.env*.local
+*.tsbuildinfo
+tmp-kenney
+ae86_final.stl
+public/uploads/*
+!public/uploads/.gitkeep
+.cursor

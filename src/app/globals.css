@@ -1,0 +1,321 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --plaza: #f3f6f2;
+  --stage: #e4e9df;
+  --ink: #0f172a;
+  --steel: #475569;
+  --line: #d5ddd0;
+  --sun: #e8a317;
+  --cta: #dc2626;
+  --ring: #1e293b;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--plaza);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--sun);
+  color: var(--ink);
+}
+
+button,
+a {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+.pill {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.pill:hover {
+  border-color: var(--ink);
+}
+
+.pill[data-active='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.redbtn {
+  background: var(--cta);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.redbtn:hover {
+  background: #b91c1c;
+}
+
+.redbtn:disabled,
+.pill:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.muted {
+  color: var(--steel);
+}
+
+.field {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 11px 12px;
+  width: 100%;
+  color: var(--ink);
+}
+
+.field:focus {
+  border-color: var(--ink);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
+}
+
+.ticket {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.ticket-stub {
+  background: var(--cta);
+  color: #fff;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.12em;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.pit-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  cursor: pointer;
+}
+
+.pit-dot[data-active='true'] {
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+.stage-well {
+  background:
+    radial-gradient(ellipse 72% 54% at 50% 36%, #fff8df 0%, #f0d98a 24%, #d5dcc4 52%, #7f8b68 100%);
+}
+
+.stage-glow {
+  position: absolute;
+  inset: 6% 10% 26%;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 38%, rgba(255, 252, 236, 0.95) 0%, rgba(255, 236, 170, 0.4) 40%, transparent 72%);
+}
+
+.stage-floor {
+  position: absolute;
+  left: 50%;
+  bottom: 9%;
+  width: 74%;
+  height: 18%;
+  transform: translateX(-50%);
+  border-radius: 100%;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.28) 0%, transparent 72%);
+  filter: blur(12px);
+}
+
+.stage-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 42%, transparent 28%, rgba(70, 82, 48, 0.26) 60%, rgba(36, 44, 24, 0.58) 100%);
+}
+
+.hotspot {
+  position: absolute;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.hotspot-core {
+  position: relative;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid var(--sun);
+  box-shadow: 0 0 0 3px rgba(232, 163, 23, 0.38), 0 6px 16px rgba(15, 23, 42, 0.22);
+}
+
+.hotspot[data-active='true'] .hotspot-core {
+  background: var(--sun);
+  border-color: var(--ink);
+  box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.18), 0 8px 18px rgba(15, 23, 42, 0.25);
+}
+
+.hotspot-pulse {
+  position: absolute;
+  inset: 8px;
+  border-radius: 999px;
+  border: 2px solid var(--sun);
+  animation: hotspot-ping 1.8s ease-out infinite;
+}
+
+.hotspot-label {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 8px;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.1);
+}
+
+.hotspot:hover .hotspot-label,
+.hotspot:focus-visible .hotspot-label,
+.hotspot[data-active='true'] .hotspot-label {
+  opacity: 1;
+}
+
+.turntable {
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.turntable[data-grabbing='true'] {
+  cursor: grabbing;
+  touch-action: none;
+}
+
+.turntable-frame {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+  transition: none;
+  backface-visibility: hidden;
+}
+
+.turntable-hint,
+.turntable-load {
+  position: absolute;
+  left: 50%;
+  bottom: 0.4rem;
+  z-index: 12;
+  transform: translateX(-50%);
+  pointer-events: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.turntable-step {
+  position: absolute;
+  top: 50%;
+  z-index: 11;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.turntable-step:hover {
+  border-color: var(--ink);
+}
+
+@keyframes hotspot-ping {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.85);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-marquee-vertical,
+  .animate-shine {
+    animation: none !important;
+  }
+  .hotspot-pulse {
+    animation: none;
+  }
+}
