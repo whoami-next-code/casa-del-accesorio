@@ -46,16 +46,16 @@ export default function HeroShowroom({
   };
 
   return (
-    <section id="inicio" className="relative min-h-[760px] h-[100svh] max-h-[1100px] overflow-hidden bg-plaza pt-16">
+    <section id="inicio" className="relative min-h-[760px] h-[100svh] max-h-[1100px] overflow-hidden bg-plaza pt-[5.25rem]">
       <AnimatedGridPattern
         numSquares={28}
         maxOpacity={0.18}
         duration={3}
-        className="text-ink/20 motion-reduce:hidden [mask-image:radial-gradient(ellipse_at_center,white,transparent_75%)]"
+        className="text-sun/25 motion-reduce:hidden [mask-image:radial-gradient(ellipse_at_center,white,transparent_75%)]"
       />
-      <div className="absolute inset-x-4 md:inset-x-8 top-20 bottom-28 md:bottom-24 rounded-[28px] overflow-hidden bg-stage">
+      <div className="absolute inset-x-4 md:inset-x-8 top-[6.5rem] bottom-28 md:bottom-24 rounded-[28px] overflow-hidden bg-stage">
         <div className="motion-reduce:hidden">
-          <BorderBeam size={90} duration={8} colorFrom="#E8A317" colorTo="#DC2626" borderWidth={2} />
+          <BorderBeam size={90} duration={8} colorFrom="#007BFF" colorTo="#F10600" borderWidth={2} />
         </div>
         <div className="absolute inset-[3px] rounded-[26px] overflow-hidden">
           {mode === 'fotos' ? (
@@ -75,7 +75,7 @@ export default function HeroShowroom({
 
         {!selected && (
           <div className="absolute left-5 top-5 z-10 max-w-[17rem] md:max-w-[22rem] pointer-events-none">
-            <div className="rounded-2xl bg-white/92 px-4 py-3 border border-line shadow-[0_10px_30px_rgba(15,23,42,0.08)]">
+            <div className="rounded-2xl bg-bay/90 backdrop-blur-md px-4 py-3 border border-line shadow-[0_16px_40px_rgba(0,0,0,0.45)]">
               <h1 className="font-display font-bold text-ink text-[26px] md:text-[38px] leading-[1.05]">
                 {mode === 'fotos' ? 'Míralo en foto.' : 'Gíralo 360°.'}
               </h1>

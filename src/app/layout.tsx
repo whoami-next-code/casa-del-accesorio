@@ -15,8 +15,8 @@ const body = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: 'La Casa del Accesorio | Plaza',
-  description: 'Mira el alerón GT sobre el auto, gira 360° y cotiza por WhatsApp.',
+  title: 'La Casa del Accesorio',
+  description: 'Exclusividad para tu automóvil. Mira el kit, gira 360° y cotiza por WhatsApp.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

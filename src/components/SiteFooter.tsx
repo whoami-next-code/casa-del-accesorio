@@ -10,15 +10,16 @@ export default function SiteFooter({
   const link = whatsappUrl(settings.whatsapp, product);
 
   return (
-    <footer id="contacto" className="border-t border-line bg-white px-6 py-12">
+    <footer id="contacto" className="relative border-t border-line bg-bay px-6 py-12">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-cta via-sun to-transparent" />
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
         <div>
-          <p className="font-display text-3xl font-bold">La Casa del Accesorio</p>
-          <p className="muted text-sm mt-2 max-w-sm">
+          <img src="/logo.png" alt="La Casa del Accesorio" className="h-16 w-auto" />
+          <p className="muted text-sm mt-4 max-w-sm">
             Lunes a sábado, 10:00 a 19:00. TikTok @lacasadelaccesorio1. Fotos y giro 360 de muestra.
           </p>
         </div>
-        <div className="flex flex-wrap gap-6 text-sm">
+        <div className="flex flex-wrap gap-6 text-sm text-steel [&_a]:hover:text-sun">
           <a href="https://www.tiktok.com/@lacasadelaccesorio1" target="_blank" rel="noreferrer">
             TikTok
           </a>

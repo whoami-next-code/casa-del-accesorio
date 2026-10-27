@@ -3,20 +3,22 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
-  --plaza: #f3f6f2;
-  --stage: #e4e9df;
-  --ink: #0f172a;
-  --steel: #475569;
-  --line: #d5ddd0;
-  --sun: #e8a317;
-  --cta: #dc2626;
-  --ring: #1e293b;
+  color-scheme: dark;
+  --plaza: #080a0d;
+  --stage: #101318;
+  --bay: #1b1f26;
+  --ink: #ffffff;
+  --steel: #b8bec8;
+  --line: #2a3140;
+  --sun: #007bff;
+  --deep: #0056d6;
+  --cta: #f10600;
+  --ring: #007bff;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
@@ -26,8 +28,8 @@ body {
 }
 
 ::selection {
-  background: var(--sun);
-  color: var(--ink);
+  background: var(--cta);
+  color: #fff;
 }
 
 button,
@@ -50,18 +52,25 @@ select:focus-visible {
   padding: 8px 14px;
   font-size: 13px;
   font-weight: 500;
-  background: #fff;
+  background: transparent;
   color: var(--ink);
   cursor: pointer;
 }
 
 .pill:hover {
-  border-color: var(--ink);
+  border-color: var(--sun);
+  color: var(--sun);
 }
 
 .pill[data-active='true'] {
-  background: var(--ink);
-  border-color: var(--ink);
+  background: var(--sun);
+  border-color: var(--sun);
+  color: #fff;
+}
+
+.pill[data-active='true']:hover {
+  background: var(--deep);
+  border-color: var(--deep);
   color: #fff;
 }
 
@@ -73,10 +82,12 @@ select:focus-visible {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(241, 6, 0, 0.35);
 }
 
 .redbtn:hover {
-  background: #b91c1c;
+  background: #c40500;
+  box-shadow: 0 8px 28px rgba(241, 6, 0, 0.35);
 }
 
 .redbtn:disabled,
@@ -90,7 +101,7 @@ select:focus-visible {
 }
 
 .field {
-  background: #fff;
+  background: var(--plaza);
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 11px 12px;
@@ -99,17 +110,22 @@ select:focus-visible {
 }
 
 .field:focus {
-  border-color: var(--ink);
+  border-color: var(--sun);
+}
+
+select.field option {
+  background: var(--bay);
+  color: var(--ink);
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--line);
+  background: rgba(27, 31, 38, 0.82);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(184, 190, 200, 0.14);
 }
 
 .ticket {
-  background: #fff;
+  background: var(--bay);
   color: var(--ink);
   border: 1px solid var(--line);
 }
@@ -128,25 +144,27 @@ select:focus-visible {
   width: 28px;
   height: 28px;
   border-radius: 999px;
-  border: 2px solid #fff;
+  border: 2px solid rgba(255, 255, 255, 0.85);
   box-shadow: 0 0 0 1px var(--line);
   cursor: pointer;
 }
 
 .pit-dot[data-active='true'] {
-  box-shadow: 0 0 0 2px var(--ink);
+  box-shadow: 0 0 0 2px var(--sun), 0 0 16px rgba(0, 123, 255, 0.55);
 }
 
 .stage-well {
   background:
-    radial-gradient(ellipse 72% 54% at 50% 36%, #fff8df 0%, #f0d98a 24%, #d5dcc4 52%, #7f8b68 100%);
+    radial-gradient(ellipse 48% 42% at 12% 82%, rgba(241, 6, 0, 0.34), transparent 62%),
+    radial-gradient(ellipse 46% 38% at 88% 18%, rgba(0, 123, 255, 0.38), transparent 64%),
+    radial-gradient(ellipse 70% 52% at 50% 42%, #1a2230 0%, #10141c 48%, #080a0d 100%);
 }
 
 .stage-glow {
   position: absolute;
   inset: 6% 10% 26%;
   pointer-events: none;
-  background: radial-gradient(ellipse at 50% 38%, rgba(255, 252, 236, 0.95) 0%, rgba(255, 236, 170, 0.4) 40%, transparent 72%);
+  background: radial-gradient(ellipse at 50% 38%, rgba(255, 255, 255, 0.1) 0%, rgba(0, 123, 255, 0.08) 36%, transparent 70%);
 }
 
 .stage-floor {
@@ -167,7 +185,7 @@ select:focus-visible {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 50% 42%, transparent 28%, rgba(70, 82, 48, 0.26) 60%, rgba(36, 44, 24, 0.58) 100%);
+    radial-gradient(ellipse at 50% 42%, transparent 30%, rgba(8, 10, 13, 0.28) 62%, rgba(8, 10, 13, 0.72) 100%);
 }
 
 .hotspot {
@@ -191,13 +209,13 @@ select:focus-visible {
   border-radius: 999px;
   background: #fff;
   border: 2px solid var(--sun);
-  box-shadow: 0 0 0 3px rgba(232, 163, 23, 0.38), 0 6px 16px rgba(15, 23, 42, 0.22);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4), 0 6px 16px rgba(0, 0, 0, 0.45);
 }
 
 .hotspot[data-active='true'] .hotspot-core {
   background: var(--sun);
-  border-color: var(--ink);
-  box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.18), 0 8px 18px rgba(15, 23, 42, 0.25);
+  border-color: #fff;
+  box-shadow: 0 0 0 4px rgba(0, 86, 214, 0.45), 0 8px 18px rgba(0, 0, 0, 0.4);
 }
 
 .hotspot-pulse {
@@ -217,13 +235,13 @@ select:focus-visible {
   font-size: 11px;
   font-weight: 600;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(27, 31, 38, 0.94);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 3px 8px;
   opacity: 0;
   pointer-events: none;
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
 .hotspot:hover .hotspot-label,
@@ -266,7 +284,7 @@ select:focus-visible {
   font-size: 11px;
   font-weight: 600;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(27, 31, 38, 0.92);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 4px 10px;
@@ -284,7 +302,7 @@ select:focus-visible {
   transform: translateY(-50%);
   border-radius: 999px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(27, 31, 38, 0.9);
   color: var(--ink);
   font-size: 22px;
   line-height: 1;
@@ -292,7 +310,8 @@ select:focus-visible {
 }
 
 .turntable-step:hover {
-  border-color: var(--ink);
+  border-color: var(--sun);
+  color: var(--sun);
 }
 
 @keyframes hotspot-ping {

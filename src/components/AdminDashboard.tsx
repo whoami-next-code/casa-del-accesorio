@@ -165,7 +165,7 @@ export default function AdminDashboard() {
                 className="w-full text-left rounded-xl px-3 py-2 text-sm"
                 data-active={entry.id === item.id}
                 style={{
-                  background: entry.id === item.id ? 'var(--ink)' : 'transparent',
+                  background: entry.id === item.id ? 'var(--sun)' : 'transparent',
                   color: entry.id === item.id ? '#fff' : 'inherit',
                 }}
                 onClick={() => setSelected(entry.id)}

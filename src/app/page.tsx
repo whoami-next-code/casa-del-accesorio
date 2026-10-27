@@ -66,7 +66,7 @@ export default function Home() {
     <>
       <Header whatsapp={whatsappUrl(settings.whatsapp, product)} />
       {error && (
-        <div role="alert" className="fixed top-20 inset-x-0 z-50 bg-red-100 text-cta p-3 text-center text-sm">
+        <div role="alert" className="fixed top-24 inset-x-0 z-50 bg-[#3a0a08] text-white border-y border-cta p-3 text-center text-sm">
           {error}{' '}
           <button className="underline" onClick={() => location.reload()}>
             Reintentar
@@ -76,10 +76,10 @@ export default function Home() {
       {loading && <span className="sr-only">Cargando datos del producto</span>}
       <HeroShowroom product={product} settings={settings} />
 
-      <div className="border-y border-line bg-white">
+      <div className="border-y border-line bg-bay">
         <Marquee pauseOnHover className="[--duration:28s]">
           {GARAGE_PARTS.map((part) => (
-            <a key={part.id} href="#inicio" className="font-display text-2xl px-6 whitespace-nowrap hover:text-cta">
+            <a key={part.id} href="#inicio" className="font-display text-2xl px-6 whitespace-nowrap hover:text-sun">
               {part.name}
             </a>
           ))}
@@ -107,7 +107,7 @@ export default function Home() {
       </section>
 
       {demo && (
-        <p className="text-steel text-xs text-center py-2 border-y border-line bg-white">
+        <p className="text-steel text-xs text-center py-2 border-y border-line bg-bay">
           Demo local. El catálogo se edita en /admin. Conecta Supabase si quieres persistencia remota.
         </p>
       )}

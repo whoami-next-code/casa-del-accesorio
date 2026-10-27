@@ -30,10 +30,10 @@ export default function PriceTag({
 
   return (
     <aside
-      className="relative w-full max-w-sm rounded-3xl bg-white p-5 shadow-[0_20px_50px_rgba(15,23,42,0.12)]"
+      className="relative w-full max-w-sm rounded-3xl bg-bay p-5 shadow-[0_24px_60px_rgba(0,0,0,0.5)]"
       aria-label={`Ficha de ${part.name}`}
     >
-      <ShineBorder shineColor={['#E8A317', '#DC2626', '#E8A317']} borderWidth={2} duration={12} />
+      <ShineBorder shineColor={['#007BFF', '#F10600', '#007BFF']} borderWidth={2} duration={12} />
       <div className="relative">
         <div className="flex justify-between items-start gap-4">
           <p className="text-sm text-steel">{part.tag}</p>

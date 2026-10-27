@@ -56,7 +56,7 @@ export default function CatalogGrid({
               `Hola, vi el catálogo y quiero cotizar ${item.name} (${item.sku}).`,
             );
             return (
-              <article key={item.id} className="rounded-3xl bg-white border border-line overflow-hidden">
+              <article key={item.id} className="rounded-3xl bg-bay border border-line overflow-hidden">
                 <div className="aspect-[4/3] bg-stage">
                   {item.photo ? (
                     <img src={item.photo} alt={item.name} className="h-full w-full object-cover" />

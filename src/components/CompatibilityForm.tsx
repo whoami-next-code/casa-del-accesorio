@@ -22,7 +22,7 @@ export default function CompatibilityForm({
   }
 
   return (
-    <section id="compatibilidad" className="px-4 md:px-8 py-16 md:py-24 bg-white border-y border-line">
+    <section id="compatibilidad" className="px-4 md:px-8 py-16 md:py-24 bg-bay border-y border-line">
       <form onSubmit={onSubmit} className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
         <div>
           <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight">Año y versión, y el mensaje queda listo</h2>

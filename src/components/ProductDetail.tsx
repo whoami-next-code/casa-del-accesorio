@@ -26,8 +26,8 @@ export default function ProductDetail({
 
   return (
     <section id="producto" className="px-4 md:px-8 py-16 md:py-24">
-      <div className="relative max-w-6xl mx-auto rounded-[28px] bg-white p-6 md:p-12 overflow-hidden">
-        <ShineBorder shineColor={['#E8A317', '#DC2626']} borderWidth={1} duration={16} />
+      <div className="relative max-w-6xl mx-auto rounded-[28px] bg-bay p-6 md:p-12 overflow-hidden">
+        <ShineBorder shineColor={['#007BFF', '#F10600']} borderWidth={1} duration={16} />
         <div className="relative grid md:grid-cols-2 gap-10">
           <div>
             <div className="bg-stage min-h-64 aspect-[4/3] flex items-center justify-center overflow-hidden rounded-2xl">
@@ -43,7 +43,7 @@ export default function ProductDetail({
                   <button
                     key={src}
                     onClick={() => setActive(i)}
-                    className={`h-14 w-16 overflow-hidden rounded-lg border ${i === active ? 'border-ink' : 'border-line'}`}
+                    className={`h-14 w-16 overflow-hidden rounded-lg border ${i === active ? 'border-sun' : 'border-line'}`}
                   >
                     <img src={src} alt="" className="h-full w-full object-cover" />
                   </button>
