@@ -1,13 +1,6 @@
 # LA CASA DEL ACCESORIO — Showroom
 
-## Qué contiene
-- Next.js: vitrina con un sedán tuneado de muestra y giro 360° (36 fotogramas).
-- Puntos sobre el auto para abrir la ficha de cada pieza. Cotización por WhatsApp.
-- Catálogo de un producto, enlace WhatsApp configurable, panel admin con Supabase Auth.
-- Sin Supabase, la web pública funciona en modo demo; `/admin` indica cómo conectar.
-
-## Requisitos
-Node.js 20+ y proyecto Supabase propio.
+Vitrina Next.js con un sedán de muestra, giro 360°, catálogo editable y cotización por WhatsApp. En local puede usar un JSON. En Vercel el catálogo, el WhatsApp y las fotos viven en Supabase.
 
 ## Desarrollo
 ```bash
@@ -17,21 +10,28 @@ npm run dev
 ```
 Abrir http://localhost:3000.
 
-## Habilitar persistencia y admin
-1. Crear proyecto Supabase.
-2. Ejecutar `supabase/schema.sql` en SQL Editor una sola vez (si existen políticas, revisar antes de reejecutar).
-3. En Authentication > Users, crear un usuario con correo y contraseña segura. Deshabilitar registro público en Auth Settings si no se requiere.
-4. En SQL Editor, ejecutar `insert into public.admin_users(user_id) values ('UUID_DEL_USUARIO');`.
-5. Copiar Project URL y **anon/publishable key** a `.env.local` usando los nombres del ejemplo. No usar service_role en frontend.
-6. Reiniciar servidor, ingresar a `/admin`, modificar precio, disponibilidad, imagen y WhatsApp. Verificar desde otro navegador y tras recarga.
-7. Para cambios en vivo entre sesiones, habilitar `supabase_realtime` para las tablas `products` y `shop_settings`. Sin ello, los cambios se muestran al recargar.
+## Conectar Supabase
+1. Crear el proyecto en Supabase.
+2. Pegar `supabase/schema.sql` entero en SQL Editor y ejecutarlo. Se puede repetir si ya corriste una versión anterior.
+3. En Project Settings > API copiar:
+   - Project URL → `NEXT_PUBLIC_SUPABASE_URL`
+   - anon public → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - service_role → `SUPABASE_SERVICE_ROLE_KEY` (solo servidor, nunca el navegador)
+4. Pegar las tres claves en `.env.local`. Cambia `ADMIN_PIN` y `ADMIN_SECRET`.
+5. Reiniciar `npm run dev`.
+6. Entrar a `/admin`, guardar el catálogo y el número de WhatsApp. La home y el catálogo leen esos datos; si Realtime está activo, se actualizan sin recargar.
+7. Para el catálogo de autos (fotos y videos de trabajos), ejecutar también `supabase/schema-cars.sql`. En `/admin` → Resultados de autos se suben las fichas.
 
-## Publicación
-Subir a GitHub, desplegar en Vercel, definir las dos variables NEXT_PUBLIC_... en la configuración del proyecto y redeplegar. Revisar políticas RLS y autenticación antes de compartir /admin.
+## Vercel
+Subir a GitHub, importar en Vercel y definir las mismas variables:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `ADMIN_PIN`
+- `ADMIN_SECRET`
+
+Redeplegar. Sin `SUPABASE_SERVICE_ROLE_KEY` el showroom se ve, pero `/admin` no puede guardar ni subir fotos.
 
 ## Límites
-Las fotos y el giro 360 son de un sedán genérico de muestra, no de un Toyota Corolla. El precio y la disponibilidad son demostrativos y no constituyen una oferta comercial.
-
-## Verificación manual sugerida
-- Arrastrar el auto en 360°, pausar/reanudar, tocar un punto y abrir ficha.
-- Configurar número real y verificar el mensaje precargado de WhatsApp.
+Las fotos y el giro 360 son de un sedán genérico de muestra, no de un Toyota Corolla. Precio y disponibilidad se confirman en taller.

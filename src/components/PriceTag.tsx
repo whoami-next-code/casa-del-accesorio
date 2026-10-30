@@ -73,8 +73,8 @@ export default function PriceTag({
           ) : (
             <p className="text-sm text-cta">WhatsApp aún no configurado.</p>
           )}
-          <a className="text-sm underline underline-offset-4" href="#producto" onClick={onClose}>
-            Ver la ficha completa
+          <a className="text-sm underline underline-offset-4" href="#catalogo" onClick={onClose}>
+            Ver en el catálogo
           </a>
         </div>
         <p className="sr-only">{GARAGE_PARTS.length} piezas en el mostrador</p>

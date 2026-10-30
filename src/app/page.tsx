@@ -3,14 +3,13 @@
 import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import HeroShowroom from '@/components/HeroShowroom';
-import ProductDetail from '@/components/ProductDetail';
 import CatalogGrid from '@/components/CatalogGrid';
+import CarResults from '@/components/CarResults';
 import InstallProcess from '@/components/InstallProcess';
 import CompatibilityForm from '@/components/CompatibilityForm';
 import FaqList from '@/components/FaqList';
 import SiteFooter from '@/components/SiteFooter';
 import { Marquee } from '@/components/ui/marquee';
-import { NumberTicker } from '@/components/ui/number-ticker';
 import { DEMO_PRODUCT, DEFAULT_SETTINGS, Product, ShopSettings, whatsappUrl } from '@/lib/product';
 import { fetchStore } from '@/lib/data';
 import { supabase } from '@/lib/supabase';
@@ -54,6 +53,8 @@ export default function Home() {
       ?.channel('showroom-updates')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, refresh)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'shop_settings' }, refresh)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'catalog_items' }, refresh)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'car_jobs' }, refresh)
       .subscribe();
 
     return () => {
@@ -88,31 +89,28 @@ export default function Home() {
 
       <section className="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-10">
         <div>
-          <p className="text-steel text-sm">Pieza de vitrina</p>
-          <p className="font-display text-5xl font-bold mt-2">
-            S/ <NumberTicker value={Number(product.price)} />
-          </p>
-          <p className="muted text-sm mt-2">Precio demo del alerón. El final se confirma en taller.</p>
+          <p className="text-steel text-sm">El catálogo</p>
+          <p className="font-display text-2xl font-semibold mt-2 leading-tight">Alerones, luces, rines y kits. Cada pieza se cotiza con tu auto.</p>
         </div>
         <div>
           <p className="text-steel text-sm">Cómo se cotiza</p>
-          <p className="font-display text-2xl font-semibold mt-2 leading-tight">Año, versión y una foto del maletero.</p>
+          <p className="font-display text-2xl font-semibold mt-2 leading-tight">Año, versión y una foto de la zona a intervenir.</p>
         </div>
         <div>
           <p className="text-steel text-sm">Siguiente paso</p>
-          <a href="#compatibilidad" className="redbtn inline-block mt-3">
-            Armar el mensaje
+          <a href="#catalogo" className="redbtn inline-block mt-3">
+            Ver piezas
           </a>
         </div>
       </section>
 
       {demo && (
         <p className="text-steel text-xs text-center py-2 border-y border-line bg-bay">
-          Demo local. El catálogo se edita en /admin. Conecta Supabase si quieres persistencia remota.
+          Demo local. El catálogo se edita en /admin. Conecta las claves de Supabase para guardarlo en la nube.
         </p>
       )}
-      <ProductDetail product={product} settings={settings} />
       <CatalogGrid product={product} settings={settings} />
+      <CarResults product={product} settings={settings} />
       <InstallProcess />
       <CompatibilityForm product={product} settings={settings} />
       <FaqList />

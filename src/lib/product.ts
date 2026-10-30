@@ -1,3 +1,5 @@
+import { BRAND } from './brand';
+
 export type Product = {
   id: string;
   sku: string;
@@ -32,7 +34,7 @@ export const DEMO_PRODUCT: Product = {
 };
 
 export type ShopSettings = { whatsapp: string };
-export const DEFAULT_SETTINGS: ShopSettings = { whatsapp: '' };
+export const DEFAULT_SETTINGS: ShopSettings = { whatsapp: BRAND.whatsapp };
 
 export const whatsappMessage = (name: string, sku: string) =>
   `Hola, estoy interesado en el ${name}, código ${sku}, que vi en su showroom 3D. Quisiera confirmar precio, disponibilidad e instalación.`;

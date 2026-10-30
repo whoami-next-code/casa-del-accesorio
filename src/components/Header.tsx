@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 const LINKS = [
   { href: '/#inicio', label: 'Plaza' },
-  { href: '/#producto', label: 'Alerón' },
   { href: '/#catalogo', label: 'Piezas' },
+  { href: '/#resultados', label: 'Resultados' },
   { href: '/#compatibilidad', label: 'Cotizar' },
 ];
 

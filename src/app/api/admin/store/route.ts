@@ -1,10 +1,18 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
-import { readInventory, writeInventory, type InventoryStore } from '@/lib/inventory-store';
+import { persistenceMode, readInventory, writeInventory, type InventoryStore } from '@/lib/inventory-store';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   if (!(await isAdmin())) return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
-  return NextResponse.json(await readInventory());
+  try {
+    const store = await readInventory();
+    return NextResponse.json({ ...store, persistence: persistenceMode() });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'No se pudo leer el catálogo';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
 
 export async function PUT(request: Request) {
@@ -13,6 +21,11 @@ export async function PUT(request: Request) {
   if (!body || !Array.isArray(body.items)) {
     return NextResponse.json({ error: 'Datos inválidos' }, { status: 400 });
   }
-  await writeInventory(body);
-  return NextResponse.json(await readInventory());
+  try {
+    const store = await writeInventory(body);
+    return NextResponse.json({ ...store, persistence: persistenceMode() });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'No se pudo guardar';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }

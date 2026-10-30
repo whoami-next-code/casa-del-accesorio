@@ -1,3 +1,4 @@
+import { BRAND } from '@/lib/brand';
 import { Product, ShopSettings, whatsappUrl } from '@/lib/product';
 
 export default function SiteFooter({
@@ -16,11 +17,11 @@ export default function SiteFooter({
         <div>
           <img src="/logo.png" alt="La Casa del Accesorio" className="h-16 w-auto" />
           <p className="muted text-sm mt-4 max-w-sm">
-            Lunes a sábado, 10:00 a 19:00. TikTok @lacasadelaccesorio1. Fotos y giro 360 de muestra.
+            Lunes a sábado, 10:00 a 19:00. TikTok {BRAND.tiktokHandle}. Fotos y giro 360 de muestra.
           </p>
         </div>
         <div className="flex flex-wrap gap-6 text-sm text-steel [&_a]:hover:text-sun">
-          <a href="https://www.tiktok.com/@lacasadelaccesorio1" target="_blank" rel="noreferrer">
+          <a href={BRAND.tiktokUrl} target="_blank" rel="noreferrer">
             TikTok
           </a>
           {link ? (

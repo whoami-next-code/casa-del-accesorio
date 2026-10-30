@@ -2,6 +2,21 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '100mb',
+    },
+    proxyClientMaxBodySize: '100mb',
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

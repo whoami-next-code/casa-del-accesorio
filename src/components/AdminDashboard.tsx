@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { CATALOG_CATEGORIES, emptyItem, garageToItem, type CatalogItem, type InventoryStore } from '@/lib/inventory';
+import { CATALOG_CATEGORIES, defaultInventory, emptyItem, type CatalogItem, type InventoryStore } from '@/lib/inventory';
+import AdminCars from './AdminCars';
 
-const blank: InventoryStore = { whatsapp: '', items: garageToItem() };
+const blank: InventoryStore = defaultInventory();
 
 export default function AdminDashboard() {
   const [ready, setReady] = useState(false);
@@ -13,6 +14,8 @@ export default function AdminDashboard() {
   const [selected, setSelected] = useState<string>(blank.items[0]?.id ?? '');
   const [message, setMessage] = useState('');
   const [busy, setBusy] = useState(false);
+  const [persistence, setPersistence] = useState('');
+  const [tab, setTab] = useState<'piezas' | 'autos'>('piezas');
 
   const item = store.items.find((entry) => entry.id === selected) ?? store.items[0] ?? emptyItem();
 
@@ -32,8 +35,9 @@ export default function AdminDashboard() {
       setAuthed(false);
       return;
     }
-    const data = (await response.json()) as InventoryStore;
+    const data = (await response.json()) as InventoryStore & { persistence?: string };
     setStore(data);
+    setPersistence(data.persistence ?? '');
     setSelected((current) => data.items.find((entry) => entry.id === current)?.id ?? data.items[0]?.id ?? '');
   }
 
@@ -66,11 +70,12 @@ export default function AdminDashboard() {
     });
     setBusy(false);
     if (!response.ok) {
-      setMessage('No se pudo guardar');
+      const error = (await response.json().catch(() => null)) as { error?: string } | null;
+      setMessage(error?.error || 'No se pudo guardar');
       return;
     }
     setStore((await response.json()) as InventoryStore);
-    setMessage('Catálogo guardado.');
+    setMessage('Catálogo guardado en Supabase.');
   }
 
   async function upload(file: File) {
@@ -111,7 +116,7 @@ export default function AdminDashboard() {
         <form onSubmit={login} className="glass p-8 rounded-2xl w-full max-w-sm space-y-5">
           <h1 className="text-2xl font-bold">Administración</h1>
           <p className="muted text-sm">
-            PIN local para cargar piezas y fotos. En demo es <code>lcda</code>. Cámbialo con <code>ADMIN_PIN</code>.
+            PIN de administración. En local el demo es <code>lcda</code>. Cámbialo con <code>ADMIN_PIN</code>.
           </p>
           <label className="block text-sm">
             PIN
@@ -138,7 +143,14 @@ export default function AdminDashboard() {
       <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
         <div>
           <h1 className="font-display text-3xl font-extrabold">Catálogo / admin</h1>
-          <p className="muted text-sm mt-1">Sube artículos, fotos y precios. Quedan en este servidor.</p>
+          <p className="muted text-sm mt-1">
+            Piezas a la venta y autos ya modificados.
+            {persistence === 'supabase-admin'
+              ? ' Guardado en Supabase.'
+              : persistence === 'local'
+                ? ' Guardado local. Faltan las claves de Supabase para Vercel.'
+                : ' Revisa SUPABASE_SERVICE_ROLE_KEY si esto es producción.'}
+          </p>
         </div>
         <div className="flex gap-2">
           <a href="/" className="pill">
@@ -155,6 +167,18 @@ export default function AdminDashboard() {
         </div>
       </div>
 
+      <div className="flex flex-wrap gap-2 mb-6" role="tablist" aria-label="Secciones de administración">
+        <button className="pill" data-active={tab === 'piezas'} onClick={() => setTab('piezas')}>
+          Piezas
+        </button>
+        <button className="pill" data-active={tab === 'autos'} onClick={() => setTab('autos')}>
+          Resultados de autos
+        </button>
+      </div>
+
+      {tab === 'autos' ? (
+        <AdminCars />
+      ) : (
       <div className="grid lg:grid-cols-[260px_1fr] gap-6">
         <aside className="glass rounded-3xl p-4 h-fit">
           <p className="text-sm text-steel mb-3">Piezas</p>
@@ -283,6 +307,7 @@ export default function AdminDashboard() {
           )}
         </section>
       </div>
+      )}
     </main>
   );
 }

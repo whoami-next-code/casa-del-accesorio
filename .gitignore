@@ -2,9 +2,13 @@ node_modules
 .next
 .env.local
 .env*.local
+env.txt
 *.tsbuildinfo
+tmp
 tmp-kenney
 ae86_final.stl
 public/uploads/*
 !public/uploads/.gitkeep
+data/cars.json
 .cursor
+.vercel

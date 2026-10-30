@@ -1,3 +1,4 @@
+import { BRAND } from './brand';
 import { GARAGE_PARTS, type GaragePartId } from './garage';
 
 export type CatalogItem = {
@@ -57,5 +58,5 @@ export function emptyItem(): CatalogItem {
 }
 
 export function defaultInventory(): InventoryStore {
-  return { whatsapp: '', items: garageToItem() };
+  return { whatsapp: BRAND.whatsapp, items: garageToItem() };
 }
